@@ -7,7 +7,7 @@ const createProductController = async (req, res) => {
 
     Object.keys(data).forEach((key) => {
       if (data[key] == null || data[key] == "") {
-        delete data.key;
+        delete data[key];
       }
     });
 
