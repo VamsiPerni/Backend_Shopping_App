@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 mongoose
   .connect(process.env.MONGO_DB_URL, {
-    dbName: "day17",
+    dbName: "shopping-app",
   })
   .then(() => {
     console.log("----DB CONNECTED-----");

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const { Schema, model } = mongoose;
 
@@ -34,6 +35,17 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+// Before creating the schema/modifying the schema {.pre} will run and hash the passswords and for the hash functions we are having different sources
+// bycrypt library it is present in the Node JS it self but we need manually we need to the customs things
+// there are two popular libraries {bycrpt.js} , {node.bycrpy.js}
+// It is the mongoose midlware
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password.toString(), 12);
+  }
+  next();
+});
 
 const UserModel = model("user", userSchema);
 
